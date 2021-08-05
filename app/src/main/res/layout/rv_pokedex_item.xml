@@ -19,6 +19,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/poke_name_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Pokemon"

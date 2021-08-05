@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.henryudorji.pokedex.data.local.db.PokeDatabase
 import com.henryudorji.pokedex.data.remote.PokeDexAPI
 import com.henryudorji.pokedex.data.remote.PokeDexRepository
+import com.henryudorji.pokedex.utils.NetworkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,7 +24,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        app: Application
+        @ApplicationContext app: Application
     ) = Room.databaseBuilder(
         app,
         PokeDatabase::class.java,
@@ -63,7 +65,12 @@ object AppModule {
     fun providePokeDexApi(retrofit: Retrofit): PokeDexAPI =
         retrofit.create(PokeDexAPI::class.java)
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesRepository(pokeDexAPI: PokeDexAPI) = PokeDexRepository(pokeDexAPI)
+
+    @Provides
+    @Singleton
+    fun provideNetworkManager(@ApplicationContext app: Application) = NetworkManager(app)
+
 }

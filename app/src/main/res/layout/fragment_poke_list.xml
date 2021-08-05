@@ -9,11 +9,32 @@
     tools:context=".ui.PokeListFragment">
 
 
+    <LinearLayout
+        android:id="@+id/container_network_status"
+        style="@style/StatusView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorStatusNotConnected"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/text_network_status"
+            style="@style/StatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            app:drawableStartCompat="@drawable/ic_internet_off"
+            tools:text="@string/text_no_connectivity" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/rv_pokedex_item"
+        android:paddingTop="@dimen/_5sdp"
+        android:clipToPadding="false"
+        android:layout_below="@id/container_network_status"
         />
 
     <ProgressBar

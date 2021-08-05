@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokeDex</string>
+    <string name="text_no_connectivity">No internet connection</string>
+    <string name="text_connectivity">You\'re back online</string>
 </resources>

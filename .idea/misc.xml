@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/drawable/ic_day.xml" value="0.203125" />
+        <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/drawable/ic_internet_off.xml" value="0.203125" />
+        <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/drawable/ic_internet_on.xml" value="0.203125" />
+        <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/drawable/ic_night.xml" value="0.203125" />
+        <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/drawable/placeholder_cover_sized.xml" value="0.203125" />
         <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/layout/fragment_poke_detail.xml" value="0.18697916666666667" />
         <entry key="..\:/WorkFolder/Android/Kotlin/PokeDex/app/src/main/res/layout/fragment_poke_list.xml" value="0.18697916666666667" />
