@@ -3,14 +3,15 @@
     package="com.henryudorji.pokedex">
 
     <application
+        android:name=".app.PokeDexApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PokeDex">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.base.BaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
