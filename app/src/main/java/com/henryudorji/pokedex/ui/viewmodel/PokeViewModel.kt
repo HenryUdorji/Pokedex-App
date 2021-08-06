@@ -14,6 +14,7 @@ import com.henryudorji.pokedex.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -54,8 +55,7 @@ class PokeViewModel @Inject constructor(
     }
 
     private fun readUiMode() = viewModelScope.launch {
-        prefsDataStore.uiMode.collect { mode ->
-            _uiModeLiveData.postValue(mode)
-        }
+        val mode = prefsDataStore.uiMode.first()
+        _uiModeLiveData.postValue(mode)
     }
 }
