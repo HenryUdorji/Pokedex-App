@@ -119,12 +119,10 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.uiModeLiveData.observe(viewLifecycleOwner) { mode ->
-                val item = menu.findItem(R.id.action_switch_ui_mode)
-                item.isChecked = mode
-                setUIMode(item, mode)
-            }
+        viewModel.uiModeLiveData.observe(viewLifecycleOwner) { mode ->
+            val item = menu.findItem(R.id.action_switch_ui_mode)
+            item.isChecked = mode
+            setUIMode(item, mode)
         }
 
         val searchItem = menu.findItem(R.id.action_search)
