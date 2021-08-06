@@ -21,5 +21,9 @@
         android:id="@+id/pokeDetailFragment"
         android:name="com.henryudorji.pokedex.ui.PokeDetailFragment"
         android:label="fragment_poke_detail"
-        tools:layout="@layout/fragment_poke_detail" />
+        tools:layout="@layout/fragment_poke_detail" >
+        <argument
+            android:name="pokemon"
+            app:argType="com.henryudorji.pokedex.data.model.Pokemon" />
+    </fragment>
 </navigation>

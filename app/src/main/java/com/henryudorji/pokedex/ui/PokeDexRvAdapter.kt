@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.pokedex.R
 import com.henryudorji.pokedex.data.model.Pokemon
 import com.henryudorji.pokedex.databinding.RvPokedexItemBinding
+import com.henryudorji.pokedex.ui.viewmodel.PokeViewModel
 import com.squareup.picasso.Picasso
 
 
@@ -25,8 +26,9 @@ class PokeDexRvAdapter:
 
                     pokeNameTv.text = pokemon.name
 
+                    // on item click
                     root.setOnClickListener {
-                        //@todo click
+                        onItemClickListener?.let { it(pokemon) }
                     }
                 }
             }
@@ -54,5 +56,12 @@ class PokeDexRvAdapter:
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon) =
             oldItem == newItem
 
+    }
+
+    // on item click listener
+    private var onItemClickListener: ((Pokemon) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Pokemon) -> Unit) {
+        onItemClickListener = listener
     }
 }

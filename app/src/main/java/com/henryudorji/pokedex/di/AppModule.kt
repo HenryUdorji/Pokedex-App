@@ -1,7 +1,9 @@
 package com.henryudorji.pokedex.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.henryudorji.pokedex.data.local.datastore.PrefsDataStore
 import com.henryudorji.pokedex.data.local.db.PokeDatabase
 import com.henryudorji.pokedex.data.remote.PokeDexAPI
 import com.henryudorji.pokedex.data.remote.PokeDexRepository
@@ -24,9 +26,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        app: Application
+        @ApplicationContext context: Context
     ) = Room.databaseBuilder(
-        app,
+        context,
         PokeDatabase::class.java,
         "poke_dex"
     )
@@ -71,6 +73,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNetworkManager(app: Application) = NetworkManager(app)
+    fun provideNetworkManager(@ApplicationContext context: Context) = NetworkManager(context)
+
+    @Provides
+    @Singleton
+    fun providePrefsDatastore(@ApplicationContext context: Context) = PrefsDataStore(context)
 
 }
