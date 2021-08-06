@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/pokeListFragment"
         android:name="com.henryudorji.pokedex.ui.PokeListFragment"
-        android:label="fragment_poke_list"
+        android:label="PokeDex"
         tools:layout="@layout/fragment_poke_list" >
         <action
             android:id="@+id/action_pokeListFragment_to_pokeDetailFragment"

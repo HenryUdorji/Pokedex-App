@@ -24,7 +24,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        @ApplicationContext app: Application
+        app: Application
     ) = Room.databaseBuilder(
         app,
         PokeDatabase::class.java,
@@ -71,6 +71,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNetworkManager(@ApplicationContext app: Application) = NetworkManager(app)
+    fun provideNetworkManager(app: Application) = NetworkManager(app)
 
 }

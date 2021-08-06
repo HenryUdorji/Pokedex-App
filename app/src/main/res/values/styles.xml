@@ -16,6 +16,12 @@
         <item name="fontFamily">@font/nunito_regular</item>
     </style>
 
+    <style name="ToolbarStyle">
+        <item name="titleTextColor">@color/white</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="StatusView">
         <item name="android:orientation">vertical</item>
         <item name="android:padding">8dp</item>
