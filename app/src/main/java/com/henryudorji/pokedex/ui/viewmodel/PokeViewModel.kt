@@ -1,16 +1,14 @@
 package com.henryudorji.pokedex.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.henryudorji.pokedex.data.local.datastore.PrefsDataStore
 import com.henryudorji.pokedex.data.model.PokeDex
 import com.henryudorji.pokedex.data.model.Pokemon
 import com.henryudorji.pokedex.data.remote.PokeDexRepository
 import com.henryudorji.pokedex.utils.NetworkManager
 import com.henryudorji.pokedex.utils.Resource
+import com.henryudorji.pokedex.utils.networkBoundResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -33,10 +31,14 @@ class PokeViewModel @Inject constructor(
     private val _pokeDexLiveData = MutableLiveData<Resource<PokeDex>>()
     val pokeDexLiveData: LiveData<Resource<PokeDex>> = _pokeDexLiveData
 
+    val pokeDex = repository.getPokeDex().asLiveData()
+
     init {
+
+
         readUiMode()
 
-        if (networkObserver.value == true) {
+        /*if (networkObserver.value == true) {
             _pokeDexLiveData.postValue(Resource.Loading())
             viewModelScope.launch(Dispatchers.IO) {
                 try {
@@ -47,7 +49,7 @@ class PokeViewModel @Inject constructor(
                     }else _pokeDexLiveData.postValue(Resource.Error("Error occurred"))
                 }
             }
-        }
+        }*/
     }
 
     fun saveUIMode(uiMode: Boolean) = viewModelScope.launch {
@@ -55,7 +57,9 @@ class PokeViewModel @Inject constructor(
     }
 
     private fun readUiMode() = viewModelScope.launch {
-        val mode = prefsDataStore.uiMode.first()
-        _uiModeLiveData.postValue(mode)
+        prefsDataStore.uiMode.collect { mode ->
+            _uiModeLiveData.postValue(mode)
+            return@collect
+        }
     }
 }

@@ -7,6 +7,11 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
+import kotlin.time.seconds
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -39,3 +44,4 @@ inline fun SearchView.OnQueryTextChanged(crossinline listener: (String) -> Unit)
 
     })
 }
+

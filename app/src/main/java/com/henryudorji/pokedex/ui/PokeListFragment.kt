@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +26,7 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     override val viewModel: PokeViewModel by activityViewModels()
 
     private lateinit var adapter: PokeDexRvAdapter
+    private var isChecked = false
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -46,7 +46,17 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     }
 
     private fun observePokeDex() = with(binding){
-        viewModel.pokeDexLiveData.observe(viewLifecycleOwner) { state ->
+        viewModel.pokeDex.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is Resource.Loading -> progressBar.show()
+                is Resource.Error -> Snackbar.make(root, state.message!!, Snackbar.LENGTH_SHORT).show()
+                is Resource.Success -> {
+                    progressBar.hide()
+                    adapter.submitList(state.data)
+                }
+            }
+        }
+        /*viewModel.pokeDexLiveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is Resource.Loading -> progressBar.show()
                 is Resource.Error -> Snackbar.make(root, state.message!!, Snackbar.LENGTH_SHORT).show()
@@ -55,7 +65,7 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
                     adapter.submitList(state.data?.pokemon)
                 }
             }
-        }
+        }*/
     }
 
     private fun initPokeDexRv() = with(binding) {
@@ -121,7 +131,7 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
 
         viewModel.uiModeLiveData.observe(viewLifecycleOwner) { mode ->
             val item = menu.findItem(R.id.action_switch_ui_mode)
-            item.isChecked = mode
+            isChecked = mode
             setUIMode(item, mode)
         }
 
@@ -135,8 +145,10 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_switch_ui_mode) {
-            item.isChecked = !item.isChecked
-            setUIMode(item, item.isChecked)
+            if (isChecked) {
+                isChecked = false
+                setUIMode(item, isChecked)
+            }
             return true
         }
         return super.onOptionsItemSelected(item)

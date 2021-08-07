@@ -65,6 +65,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
+    //Livedata
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
     //Navigation graph
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
@@ -79,7 +82,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc01"
 
     //Paging
-    //implementation "androidx.paging:paging-runtime-ktx:3.0.0"
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0"
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version") {
