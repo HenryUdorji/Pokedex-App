@@ -69,7 +69,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesRepository(pokeDexAPI: PokeDexAPI) = PokeDexRepository(pokeDexAPI)
+    fun providesRepository(
+        pokeDexAPI: PokeDexAPI,
+        pokeDatabase: PokeDatabase
+    ) = PokeDexRepository(pokeDexAPI, pokeDatabase)
 
     @Provides
     @Singleton

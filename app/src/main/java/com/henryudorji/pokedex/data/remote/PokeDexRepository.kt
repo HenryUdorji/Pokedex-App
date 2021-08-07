@@ -4,9 +4,10 @@ import androidx.room.withTransaction
 import com.henryudorji.pokedex.data.local.db.PokeDatabase
 import com.henryudorji.pokedex.utils.networkBoundResource
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 
-class PokeDexRepository(
+class PokeDexRepository @Inject constructor (
     private val pokeDexAPI: PokeDexAPI,
     private val pokeDatabase: PokeDatabase
 ) {
