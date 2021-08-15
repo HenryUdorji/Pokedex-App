@@ -21,13 +21,8 @@ data class Pokemon(
     val img: String,
     @SerializedName("name")
     val name: String,
-    @SerializedName("next_evolution")
-    val nextEvolution: @RawValue List<NextEvolution>,
     @SerializedName("num")
     val num: String,
-    @SerializedName("prev_evolution")
-    val prevEvolution: @RawValue List<PrevEvolution>,
-    @SerializedName("type")
     val type: List<String>,
     @SerializedName("weaknesses")
     val weaknesses: List<String>,

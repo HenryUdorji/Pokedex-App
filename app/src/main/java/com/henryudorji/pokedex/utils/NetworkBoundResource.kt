@@ -1,5 +1,7 @@
+/*
 package com.henryudorji.pokedex.utils
 
+import android.util.Log
 import kotlinx.coroutines.flow.*
 
 inline fun <ResultType, RequestType> networkBoundResource(
@@ -15,9 +17,8 @@ inline fun <ResultType, RequestType> networkBoundResource(
         try {
             saveFetchedResult(fetch())
             query().map { Resource.Success(it) }
-        }catch (e: Exception) {
-            val message = if (e.message != null) e.message else "SHOULD_FETCH Error"
-            query().map { Resource.Error(message!!, it) }
+        }catch (throwable: Throwable) {
+            query().map { Resource.Error(throwable, it) }
         }
     }else {
         query().map { Resource.Success(it) }
@@ -25,3 +26,4 @@ inline fun <ResultType, RequestType> networkBoundResource(
 
     emitAll(flow)
 }
+*/

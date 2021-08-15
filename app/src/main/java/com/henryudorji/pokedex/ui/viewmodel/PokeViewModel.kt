@@ -3,16 +3,14 @@ package com.henryudorji.pokedex.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.henryudorji.pokedex.data.local.datastore.PrefsDataStore
-import com.henryudorji.pokedex.data.model.PokeDex
 import com.henryudorji.pokedex.data.model.Pokemon
-import com.henryudorji.pokedex.data.remote.PokeDexRepository
+import com.henryudorji.pokedex.data.repository.PokeDexRepository
 import com.henryudorji.pokedex.utils.NetworkManager
 import com.henryudorji.pokedex.utils.Resource
-import com.henryudorji.pokedex.utils.networkBoundResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,33 +21,45 @@ class PokeViewModel @Inject constructor(
     private val prefsDataStore: PrefsDataStore
 ): ViewModel() {
 
+    private val TAG = "PokeViewModel"
     private val networkObserver = networkManager.observeConnectionStatus
 
     private val _uiModeLiveData = MutableLiveData<Boolean>()
     val uiModeLiveData: LiveData<Boolean> = _uiModeLiveData
 
-    private val _pokeDexLiveData = MutableLiveData<Resource<PokeDex>>()
-    val pokeDexLiveData: LiveData<Resource<PokeDex>> = _pokeDexLiveData
-
-    val pokeDex = repository.getPokeDex().asLiveData()
+    private val _pokemonLiveData = MutableLiveData<Resource<List<Pokemon>>>()
+    val pokemonLiveData: LiveData<Resource<List<Pokemon>>> = _pokemonLiveData
 
     init {
-
-
         readUiMode()
 
-        /*if (networkObserver.value == true) {
-            _pokeDexLiveData.postValue(Resource.Loading())
+        try {
+            getPokemonFromDb()
+        }catch (e: Exception) {
+            Log.d(TAG, "Get Err_ ${e.message}")
+        }
+    }
+
+    private fun getPokemonFromDb() = viewModelScope.launch {
+        repository.getPokemonFromDb().collect { pokemon ->
+            _pokemonLiveData.postValue(Resource.Success(pokemon))
+        }
+        getPokemonFromApi()
+    }
+
+    fun getPokemonFromApi() {
+        if (networkObserver.value == true) {
+            _pokemonLiveData.postValue(Resource.Loading())
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    _pokeDexLiveData.postValue(Resource.Success(repository.getPokeDex()))
+                    repository.deleteAndInsertPokemonFromDb(repository.getPokemonFromApi().pokemon)
+                    getPokemonFromDb()
                 }catch (e: Exception) {
-                    if (e.message != null) {
-                        _pokeDexLiveData.postValue(Resource.Error(e.message!!))
-                    }else _pokeDexLiveData.postValue(Resource.Error("Error occurred"))
+                    _pokemonLiveData.postValue(Resource.Error("Could not fetch new data"))
+                    getPokemonFromDb()
                 }
             }
-        }*/
+        }
     }
 
     fun saveUIMode(uiMode: Boolean) = viewModelScope.launch {

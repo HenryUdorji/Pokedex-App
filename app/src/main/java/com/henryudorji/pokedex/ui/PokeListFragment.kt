@@ -3,11 +3,14 @@ package com.henryudorji.pokedex.ui
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -19,12 +22,12 @@ import com.henryudorji.pokedex.utils.*
 import com.henryudorji.pokedex.utils.Constants.ANIMATION_DURATION
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import www.thecodemonks.techbytes.utils.*
 
 @AndroidEntryPoint
 class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     override val viewModel: PokeViewModel by activityViewModels()
 
+    private val TAG = "PokeListFragment"
     private lateinit var adapter: PokeDexRvAdapter
     private var isChecked = false
 
@@ -46,26 +49,20 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     }
 
     private fun observePokeDex() = with(binding){
-        viewModel.pokeDex.observe(viewLifecycleOwner) { state ->
+        viewModel.pokemonLiveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is Resource.Loading -> progressBar.show()
-                is Resource.Error -> Snackbar.make(root, state.message!!, Snackbar.LENGTH_SHORT).show()
+                is Resource.Error -> {
+                    progressBar.hide()
+                    Log.d(TAG, "observePokeDex: ${state.error}")
+                    Snackbar.make(root, "state.local", Snackbar.LENGTH_SHORT).show()
+                }
                 is Resource.Success -> {
                     progressBar.hide()
                     adapter.submitList(state.data)
                 }
             }
         }
-        /*viewModel.pokeDexLiveData.observe(viewLifecycleOwner) { state ->
-            when(state) {
-                is Resource.Loading -> progressBar.show()
-                is Resource.Error -> Snackbar.make(root, state.message!!, Snackbar.LENGTH_SHORT).show()
-                is Resource.Success -> {
-                    progressBar.hide()
-                    adapter.submitList(state.data?.pokemon)
-                }
-            }
-        }*/
     }
 
     private fun initPokeDexRv() = with(binding) {
@@ -73,7 +70,6 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
         recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = this@PokeListFragment.adapter
-            addItemDecoration(SpacesItemDecorator(10))
         }
         adapter.setOnItemClickListener { pokemon ->
             val action = PokeListFragmentDirections.actionPokeListFragmentToPokeDetailFragment(pokemon)
@@ -129,11 +125,11 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toolbar_menu, menu)
 
-        viewModel.uiModeLiveData.observe(viewLifecycleOwner) { mode ->
+        /*viewModel.uiModeLiveData.observe(viewLifecycleOwner) { mode ->
             val item = menu.findItem(R.id.action_switch_ui_mode)
             isChecked = mode
             setUIMode(item, mode)
-        }
+        }*/
 
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
@@ -144,13 +140,13 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_switch_ui_mode) {
+        /*if (item.itemId == R.id.action_switch_ui_mode) {
             if (isChecked) {
                 isChecked = false
                 setUIMode(item, isChecked)
             }
             return true
-        }
+        }*/
         return super.onOptionsItemSelected(item)
     }
 

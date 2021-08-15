@@ -1,12 +1,12 @@
 package com.henryudorji.pokedex.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.hadiyarajesh.flower.calladpater.FlowCallAdapterFactory
 import com.henryudorji.pokedex.data.local.datastore.PrefsDataStore
 import com.henryudorji.pokedex.data.local.db.PokeDatabase
 import com.henryudorji.pokedex.data.remote.PokeDexAPI
-import com.henryudorji.pokedex.data.remote.PokeDexRepository
+import com.henryudorji.pokedex.data.repository.PokeDexRepository
 import com.henryudorji.pokedex.utils.NetworkManager
 import dagger.Module
 import dagger.Provides
@@ -60,6 +60,7 @@ object AppModule {
             .baseUrl(PokeDexAPI.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
+            .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .build()
 
     @Provides

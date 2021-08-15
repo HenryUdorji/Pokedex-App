@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/pokeDetailFragment"
         android:name="com.henryudorji.pokedex.ui.PokeDetailFragment"
-        android:label="fragment_poke_detail"
+        android:label="Detail"
         tools:layout="@layout/fragment_poke_detail" >
         <argument
             android:name="pokemon"

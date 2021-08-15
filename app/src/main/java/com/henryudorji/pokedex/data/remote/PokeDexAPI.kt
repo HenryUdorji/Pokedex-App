@@ -1,6 +1,7 @@
 package com.henryudorji.pokedex.data.remote
 
 import com.henryudorji.pokedex.data.model.PokeDex
+import com.henryudorji.pokedex.data.model.Pokemon
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.http.GET
