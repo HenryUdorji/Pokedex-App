@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -32,8 +32,61 @@
                 android:text="@string/app_name"
                 style="@style/TitleTextView"
                 android:layout_marginTop="@dimen/_65sdp"
+                app:layout_constraintTop_toTopOf="parent"
                 />
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/height_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/weight_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title">
+
+                <TextView
+                    style="@style/BodyTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Height"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/height_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40cm"
+                    style="@style/BodyTextView"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/weight_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintStart_toEndOf="@id/height_layout">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weight"
+                    style="@style/BodyTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/weight_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40kg"
+                    style="@style/BodyTextView"
+                    />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <ImageView

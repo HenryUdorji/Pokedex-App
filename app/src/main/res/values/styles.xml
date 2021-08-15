@@ -10,6 +10,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="BodyTextView">
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="StatusTextView">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@android:color/white</item>

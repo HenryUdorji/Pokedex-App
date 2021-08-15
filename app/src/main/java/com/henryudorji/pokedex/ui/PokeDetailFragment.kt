@@ -36,5 +36,7 @@ class PokeDetailFragment: BaseFragment<FragmentPokeDetailBinding, PokeViewModel>
         Picasso.get()
             .load(pokemon.img).into(pokeImg)
         title.text = pokemon.name
+        heightChip.text = pokemon.height
+        weightChip.text = pokemon.weight
     }
 }
