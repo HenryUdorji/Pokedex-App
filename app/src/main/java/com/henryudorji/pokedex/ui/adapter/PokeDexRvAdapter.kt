@@ -1,16 +1,13 @@
-package com.henryudorji.pokedex.ui
+package com.henryudorji.pokedex.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.pokedex.R
 import com.henryudorji.pokedex.data.model.Pokemon
 import com.henryudorji.pokedex.databinding.RvPokedexItemBinding
-import com.henryudorji.pokedex.ui.viewmodel.PokeViewModel
 import com.squareup.picasso.Picasso
 
 

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/purple_500"
-    tools:context=".ui.PokeDetailFragment">
+    tools:context=".ui.fragment.PokeDetailFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -150,5 +150,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_20sdp"
         android:elevation="@dimen/_5sdp"
+        android:transitionName="detail_image"
         />
 </FrameLayout>

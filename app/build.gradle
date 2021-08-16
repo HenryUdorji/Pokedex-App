@@ -103,9 +103,6 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:$hilt_androidX_version"
 
-    //network Bound Resource Caching
-    implementation "io.github.hadiyarajesh:flower:2.0.0"
-
     //rounded image
     implementation 'com.makeramen:roundedimageview:2.3.0'
 }

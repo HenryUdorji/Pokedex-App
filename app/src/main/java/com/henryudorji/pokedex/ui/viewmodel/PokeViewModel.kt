@@ -47,7 +47,7 @@ class PokeViewModel @Inject constructor(
         getPokemonFromApi()
     }
 
-    fun getPokemonFromApi() {
+    private fun getPokemonFromApi() {
         if (networkObserver.value == true) {
             _pokemonLiveData.postValue(Resource.Loading())
             viewModelScope.launch(Dispatchers.IO) {

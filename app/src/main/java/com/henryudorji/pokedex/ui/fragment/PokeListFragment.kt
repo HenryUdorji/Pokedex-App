@@ -1,4 +1,4 @@
-package com.henryudorji.pokedex.ui
+package com.henryudorji.pokedex.ui.fragment
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -7,21 +7,20 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.pokedex.R
 import com.henryudorji.pokedex.databinding.FragmentPokeListBinding
+import com.henryudorji.pokedex.ui.adapter.PokeDexRvAdapter
 import com.henryudorji.pokedex.ui.base.BaseFragment
 import com.henryudorji.pokedex.ui.viewmodel.PokeViewModel
 import com.henryudorji.pokedex.utils.*
 import com.henryudorji.pokedex.utils.Constants.ANIMATION_DURATION
+import com.henryudorji.pokedex.utils.Constants.DARK_MODE
+import com.henryudorji.pokedex.utils.Constants.LIGHT_MODE
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
@@ -72,7 +71,8 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
             adapter = this@PokeListFragment.adapter
         }
         adapter.setOnItemClickListener { pokemon ->
-            val action = PokeListFragmentDirections.actionPokeListFragmentToPokeDetailFragment(pokemon)
+            val action =
+                PokeListFragmentDirections.actionPokeListFragmentToPokeDetailFragment(pokemon)
             findNavController().navigate(action)
         }
     }
@@ -140,25 +140,27 @@ class PokeListFragment: BaseFragment<FragmentPokeListBinding, PokeViewModel>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        /*if (item.itemId == R.id.action_switch_ui_mode) {
-            if (isChecked) {
-                isChecked = false
-                setUIMode(item, isChecked)
-            }
+        if (item.itemId == R.id.action_light_mode) {
+            setUIMode(LIGHT_MODE)
             return true
-        }*/
+        }
+        if (item.itemId == R.id.action_dark_mode) {
+            setUIMode(DARK_MODE)
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setUIMode(item: MenuItem, isChecked: Boolean) {
-        if (isChecked) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            viewModel.saveUIMode(true)
-            item.setIcon(R.drawable.ic_night)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            viewModel.saveUIMode(false)
-            item.setIcon(R.drawable.ic_day)
+    private fun setUIMode(mode: String) {
+        when(mode) {
+            LIGHT_MODE -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                //viewModel.saveUIMode(true)
+            }
+            DARK_MODE -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                //viewModel.saveUIMode(false)
+            }
         }
     }
 }

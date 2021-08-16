@@ -9,10 +9,13 @@
         app:showAsAction="always|collapseActionView"
         />
 
-    <item android:id="@+id/action_switch_ui_mode"
-        android:title="Switch Mode"
-        android:icon="@drawable/ic_night"
-        android:checkable="true"
-        app:showAsAction="ifRoom"
+    <item android:id="@+id/action_light_mode"
+        android:title="Light Mode"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/action_dark_mode"
+        android:title="Dark Mode"
+        app:showAsAction="never"
         />
 </menu>

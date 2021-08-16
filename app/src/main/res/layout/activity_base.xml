@@ -20,7 +20,7 @@
             android:layout_height="?actionBarSize"
             app:title="@string/app_name"
             style="@style/ToolbarStyle"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:menu="@menu/toolbar_menu"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
