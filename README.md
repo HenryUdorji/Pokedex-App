@@ -45,10 +45,10 @@
     |
     |
     ├── ui                  # Activity/View layer
-    │   ├── |── base        # Base Activity
+    │   ├── |── base        # Base Activity & Fragment
     |   │   ├── adapter     # Adapter for RecyclerView
     |   │   └── viewmodel   # Viewmodels for Articles
-    |   |   └── fragment    # Viewmodels for Articles
+    |   |   └── fragment    # Fragments for Pokemon
     |
     |
     |── utils               
