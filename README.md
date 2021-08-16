@@ -1,7 +1,4 @@
 
-
-![GitHub Cards Preview](https://github.com/TheCodeMonks/TechBytes/blob/master/screenshots/nytimes_card.jpg?raw=true)
-
 # 🗞 PokeDex
 **PokeDex** is simple app that fetches pokemon from a json Api 🗞 Android application built to describe the use of Modern Android development tools.  *Made with love ❤️ by [Hash](https://github.com/HenryUdorji)*
 
